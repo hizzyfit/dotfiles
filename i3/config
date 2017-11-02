@@ -1,0 +1,78 @@
+hide_edge_borders both
+for_window [class="^.*"] border pixel 0 
+gaps inner 5
+gaps outer 5
+font pango:Liberation Mono 10
+set $mod Mod4
+set $term sakura
+set $browser0 firefox
+set $browser1 chrome
+floating_modifier Mod1
+
+exec --no-startup-id compton
+exec_always --no-startup-id setxkbmap se
+exec --no-startup-id unclutter
+
+bindsym $mod+Return 		exec --no-startup-id $term
+bindsym $mod+Shift+Return 	exec --no-startup-id $term -e tmux
+
+bindsym $mod+F1			exec $browser0
+bindsym $mod+Shift+F1		exec $browser1
+bindsym $mod+F2			exec thunderbird
+bindsym $mod+F3			exec libreoffice
+bindsym $mod+F4			exec darktable
+bindsym $mod+F5			exec gimp
+bindsym $mod+F12		exec keepassx
+bindsym Print			exec mate-screenshot -i
+bindsym $mod+Insert		exec i3-dmenu-desktop
+
+bindsym Mod1+Tab		workspace next
+bindsym Mod1+Shift+Tab		workspace prev
+
+bindsym $mod+Shift+space 	floating toggle
+bindsym $mod+space		focus mode_toggle
+
+bindsym $mod+Escape		workspace prev
+bindsym $mod+Shift+Escape 	exec i3-msg exit
+
+bindsym $mod+Shift+BackSpace	exec sudo reboot
+
+bindsym $mod+t			split toggle
+bindsym $mod+Shift+t		gaps inner current set 5; gaps outer current set 5
+
+bindsym $mod+s			gaps inner current plus 5
+bindsym $mod+Shift+s		gaps inner current minus 5
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+Left		focus left
+bindsym $mod+Down		focus down
+bindsym $mod+Up			focus up
+bindsym $mod+Right 		focus right
+bindsym $mod+Shift+Left		move left
+bindsym $mod+Shift+Down		move down
+bindsym $mod+Shift+Up		move up
+bindsym $mod+Shift+Right 	move right
+
+bindsym $mod+v			split vertical
+bindsym $mod+h			split horizontal
+
+bindsym $mod+Shift+r		restart
+bindsym $mod+Shift+w		reload
+bindsym $mod+Shift+e		exit
+
+bar {
+	status_command /usr/local/bin/i3status
+	position top
+}
+
+#Darktable
+assign [class="Darktable"] Darktable
+for_window [class="Darktable"] floating enable
+
+#GIMP
+assign [instance="gimp"] GIMP
+for_window [instance="gimp"] floating enable
+
+# Screenshot
+for_window [class="Mate-screenshot"] floating enable

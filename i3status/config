@@ -1,0 +1,33 @@
+general {
+	output_format = "i3bar"
+	colors = true
+	interval = 5
+}
+
+order += "disk /"
+order += "ethernet em0"
+order += "cpu_temperature 0"
+order += "load"
+order += "tztime local"
+
+ethernet em0 {
+	format_up = "E: %ip (%speed)"
+	format_down = "E: down"
+}
+
+tztime local {
+	format = "%Y-%m-%d %H:%M"
+}
+
+load {
+	format ="%5min"
+}
+
+cpu_temperature 0 {
+	format = "T: %degrees °C"
+}
+
+disk "/" {
+	format = "%free"
+}
+
